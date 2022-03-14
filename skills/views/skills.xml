@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="view_skills_tree" model="ir.ui.view">
+        <field name="name">view.skills.tree</field>
+        <field name="model">skills.list</field>
+        <field name="arch" type="xml">
+            <tree string="Employee skills">
+                <field name="Skills"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_skills_form" model="ir.ui.view">
+        <field name="name">view.skills.form</field>
+        <field name="model">skills.list</field>
+        <field name="arch" type="xml">
+            <form string="Employee skills">
+                <sheet name="Employee skills">
+                    <notebook>
+                        <page string="Skills">
+                             <group>
+                        <group>
+                         <field name="Skills" required="1"></field>
+                        </group>
+                    </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record id="view_employee_skill_form" model ="ir.ui.view">
+         <field name="name"> view.employee.skill.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='public']" position="after">
+                  <page string="Skills">
+                      <group>
+                        <group>
+                         <field name="empskill"></field>
+<!--                         <field name="proficiency"></field>-->
+<!--                         <field name="certification"></field>-->
+                        </group>
+                    </group>
+                        </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="employee_skills_action" model="ir.actions.act_window">
+        <field name="name">Employee Skills</field>
+        <field name="res_model">skills.list</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="employee_skills_menu"
+              name="Skills"
+              action="employee_skills_action"
+    />
+
+
+</odoo>

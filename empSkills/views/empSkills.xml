@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="view_empskills_tree" model="ir.ui.view">
+        <field name="name">view.empskills.tree</field>
+        <field name="model">emp.skills</field>
+        <field name="arch" type="xml">
+
+            <tree string="Employee skills">
+                <field name="employees"></field>
+                <field name="skills"></field>
+                <field name="proficiency"></field>
+                <field name="certification"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_empskills_form" model="ir.ui.view">
+        <field name="name">view.empskills.form</field>
+        <field name="model">emp.skills</field>
+        <field name="arch" type="xml">
+            <form string="Employee skills">
+                <sheet name="Employee skills">
+                    <group>
+                        <group>
+                        <field name="employees"></field>
+                        <field name="skills" required="1"></field>
+                        <field name="proficiency" required="1"></field>
+                        <field name="certification" required="1"></field>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+      <record id="view_employee_skill_form" model ="ir.ui.view">
+         <field name="name"> view.employee.skill.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='public']" position="after">
+                  <page string="Employee Skills">
+                      <group>
+                        <group>
+                         <field name="skills"></field>
+<!--                         <field name="proficiency"></field>-->
+<!--                         <field name="certification"></field>-->
+                        </group>
+                    </group>
+                        </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="employee_empskills_action" model="ir.actions.act_window">
+        <field name="name">Employee Skills</field>
+        <field name="res_model">emp.skills</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="employee_empskills_menu"
+              name="Employee Skills"
+              action="employee_empskills_action"
+    />
+     <menuitem id="emp_skills"
+              name="Employee Skills"
+              parent="employee_empskills_menu"
+              action="employee_empskills_action"
+              sequence="1"
+            />
+
+
+</odoo>
